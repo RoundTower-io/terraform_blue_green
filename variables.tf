@@ -1,6 +1,6 @@
 
 variable "trainingID" {
-  default = "trainingX"
+  default = "training99"
 }
 
 variable "deployment" {
