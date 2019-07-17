@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "b" {
-  bucket = var.s3bucket
+  bucket = "${var.trainingID}-rtt-terraform-blue-green-example"
   acl    = "private"
 }
 
@@ -20,7 +20,7 @@ resource "aws_s3_bucket_object" "green" {
 }
 
 resource "aws_lambda_function" "example" {
-  function_name = var.function_name
+  function_name = "${var.trainingID}_Blue_Green"
 
   # The bucket name as created earlier with "aws s3api create-bucket"
   s3_bucket = aws_s3_bucket.b.id
@@ -38,7 +38,7 @@ resource "aws_lambda_function" "example" {
 # IAM role which dictates what other AWS services the Lambda function
 # may access.
 resource "aws_iam_role" "lambda_exec" {
-  name = "bluegreen_example_lambda"
+  name = "${var.trainingID}_bluegreen_example_lambda"
 
   assume_role_policy = <<EOF
 {

@@ -1,6 +1,6 @@
 
 resource "aws_api_gateway_rest_api" "example" {
-  name        = var.api_name
+  name        = "${var.trainingID}_blue_green_api"
   description = "Terraform Serverless Application Example"
 }
 
