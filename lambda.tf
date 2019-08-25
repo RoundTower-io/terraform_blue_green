@@ -7,6 +7,18 @@ resource "aws_s3_bucket" "b" {
   acl    = "private"
 }
 
+data "archive_file" "bluezip" {
+  type        = "zip"
+  source_file = "${path.module}/blue/main.js"
+  output_path = "${path.module}/blue.zip"
+}
+
+data "archive_file" "greenzip" {
+  type        = "zip"
+  source_file = "${path.module}/green/main.js"
+  output_path = "${path.module}/green.zip"
+}
+
 resource "aws_s3_bucket_object" "blue" {
   bucket = aws_s3_bucket.b.id
   key    = "blue.zip"
